@@ -25,7 +25,7 @@ CREATE TABLE `t_block`
     `nonce`              varchar(20),
     PRIMARY KEY (`block_id`),
     unique `idx_blockhash` (`blockhash`),
-    unique `idx_height` (`height`),
+    index `idx_height` (`height`),
     index `idx_time` (`time`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8

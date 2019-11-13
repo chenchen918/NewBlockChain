@@ -33,9 +33,7 @@ public class BlockServiceImpl implements BlockService {
         block.setVersion(blockJson.getString("versionHex"));
         block.setNonce(blockJson.getInteger("nonce").toString());
         block.setWeight(blockJson.getInteger("weight"));
-        //todo get block reward
-        //todo change bits to string
-        //todo calculate tx volume, fee
+
 
         blockMapper.insert(block);
 
