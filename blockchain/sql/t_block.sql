@@ -26,7 +26,7 @@ CREATE TABLE `t_block`
     PRIMARY KEY (`block_id`),
     unique `idx_blockhash` (`blockhash`),
     unique `idx_height` (`height`),
-    unique `idx_time` (`time`)
+    index `idx_time` (`time`)
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   auto_increment = 1;
