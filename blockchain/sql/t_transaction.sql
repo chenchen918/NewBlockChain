@@ -8,9 +8,9 @@ CREATE TABLE `t_transaction`
 (
     `transaction_id`      int(11)  NOT NULL auto_increment,
     `txid`                char(64) not null,
-    `txhash`              char(64) not null,
+    `txhash`              char(64),
     `time`                bigint   not null,
-    `amount`              double   not null,
+    `amount`              double,
     `fees`                double,
     `confirmations`       int(11),
     `status`              tinyint,
