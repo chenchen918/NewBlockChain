@@ -4,10 +4,14 @@ import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.client.BitcoinRest;
 import com.cc.blockchain.dao.BlockMapper;
 import com.cc.blockchain.po.Block;
+import com.cc.blockchain.po.Transaction;
 import com.cc.blockchain.service.BlockService;
 
+import com.cc.blockchain.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 
 @Service
 public class BlockServiceImpl implements BlockService {
@@ -18,6 +22,8 @@ public class BlockServiceImpl implements BlockService {
     @Autowired
     private BitcoinRest bitcoinRest;
 
+    @Autowired
+    private TransactionService transactionService;
     @Override
     public String syncBlock(String blockhash) {
         JSONObject blockJson = bitcoinRest.getBlockNoTxDetails(blockhash);
@@ -36,7 +42,13 @@ public class BlockServiceImpl implements BlockService {
 
 
         blockMapper.insert(block);
+        Integer blockId = block.getBlockId();
+        Long time = block.getTime();
 
+        ArrayList<String> txids = (ArrayList<String>) blockJson.get("tx");
+        for (String txid : txids) {
+            transactionService.syncTransaction(txid, blockId, time);
+        }
         String nextblockhash = blockJson.getString("nextblockhash");
         return nextblockhash;
     }

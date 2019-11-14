@@ -24,7 +24,7 @@ CREATE TABLE `t_block`
     `transaction_volume` double,
     `nonce`              varchar(20),
     PRIMARY KEY (`block_id`),
-    unique `idx_blockhash` (`blockhash`),
+    index `idx_blockhash` (`blockhash`),
     index `idx_height` (`height`),
     index `idx_time` (`time`)
 ) ENGINE = InnoDB
