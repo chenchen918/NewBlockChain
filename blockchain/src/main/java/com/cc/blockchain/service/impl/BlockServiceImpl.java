@@ -8,13 +8,17 @@ import com.cc.blockchain.po.Transaction;
 import com.cc.blockchain.service.BlockService;
 
 import com.cc.blockchain.service.TransactionService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 
 @Service
 public class BlockServiceImpl implements BlockService {
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     private BitcoinRest bitcoinRest;
@@ -56,10 +60,13 @@ public class BlockServiceImpl implements BlockService {
     }
 
     @Override
+    @Async
     public void syncBlocks(String fromBlockhash) {
-        String tempBlockhash = fromBlockhash;
-        while (tempBlockhash != null){
-            tempBlockhash = syncBlock(tempBlockhash);
+        logger.info("同 步 开 始");
+        String BlockHashs = fromBlockhash;
+        while (BlockHashs != null){
+            BlockHashs = syncBlock(BlockHashs);
         }
+        logger.info("同 步 结 束 ");
     }
 }

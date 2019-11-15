@@ -30,20 +30,20 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction = new Transaction();
 
         transaction.setBlockId(blockId);
+        transaction.setTxid(transactionJson.getString("txid"));
+        transaction.setTxhash(transactionJson.getString("hash"));
         transaction.setSizeondisk(transactionJson.getInteger("size"));
+        transaction.setWeight(transactionJson.getInteger("weight"));
         transaction.setStatus((byte)0);
         transaction.setTime(time);
-        transaction.setTxhash(transactionJson.getString("hash"));
-        transaction.setTxid(transactionJson.getString("txid"));
-        transaction.setWeight(transactionJson.getInteger("weight"));
 
         transactionMapper.insert(transaction);
 
         Integer transactionId = transaction.getTransactionId();
 
-        List<JSONObject> vouts = transactionJson.getJSONArray("vout").toJavaList(JSONObject.class);
-        for (JSONObject vout : vouts) {
-            transactionDetailService.syncTxDetailVout(vout, transactionId);
+        List<JSONObject> outs = transactionJson.getJSONArray("vout").toJavaList(JSONObject.class);
+        for (JSONObject out : outs) {
+            transactionDetailService.syncTxDetailVout(out, transactionId);
         }
 
 

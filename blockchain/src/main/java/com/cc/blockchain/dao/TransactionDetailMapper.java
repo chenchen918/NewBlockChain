@@ -1,6 +1,9 @@
 package com.cc.blockchain.dao;
 
 import com.cc.blockchain.po.TransactionDetail;
+import feign.Param;
+
+import java.util.List;
 
 public interface TransactionDetailMapper {
     int deleteByPrimaryKey(Long txDetailId);
@@ -14,4 +17,6 @@ public interface TransactionDetailMapper {
     int updateByPrimaryKeySelective(TransactionDetail record);
 
     int updateByPrimaryKey(TransactionDetail record);
+
+    List<TransactionDetail> selectTransactionById(@Param("transactionId") Integer transactionId);
 }
