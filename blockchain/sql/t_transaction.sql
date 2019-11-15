@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS `t_transaction`;
 CREATE TABLE `t_transaction`
 (
     `transaction_id`      int(11)  NOT NULL auto_increment,
-    `txid`                char(64) not null,
+    `txid`                char(255),
     `txhash`              char(64),
     `time`                bigint   not null,
     `amount`              double,
@@ -22,8 +22,8 @@ CREATE TABLE `t_transaction`
     `fee_per_weight_unit` double,
     `block_id`            int,
     PRIMARY KEY (`transaction_id`),
-    unique `idx_txid` (`txid`),
-    unique `idx_txhash` (`txhash`),
+    index `idx_txid` (`txid`),
+    index `idx_txhash` (`txhash`),
     index `idx_time` (`time`),
     index `idx_block_id` (`block_id`)
 ) ENGINE = InnoDB

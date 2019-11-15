@@ -17,13 +17,14 @@ import java.util.ArrayList;
 public class BlockServiceImpl implements BlockService {
 
     @Autowired
-    private BlockMapper blockMapper;
-
-    @Autowired
     private BitcoinRest bitcoinRest;
 
     @Autowired
-    private TransactionService transactionService;
+    private BlockMapper blockMapper;
+
+    @Autowired
+    private TransactionServiceImpl transactionService;
+
     @Override
     public String syncBlock(String blockhash) {
         JSONObject blockJson = bitcoinRest.getBlockNoTxDetails(blockhash);
@@ -49,6 +50,7 @@ public class BlockServiceImpl implements BlockService {
         for (String txid : txids) {
             transactionService.syncTransaction(txid, blockId, time);
         }
+
         String nextblockhash = blockJson.getString("nextblockhash");
         return nextblockhash;
     }

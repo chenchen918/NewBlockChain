@@ -1,8 +1,11 @@
 package com.cc.blockchain.po;
 
+import javax.persistence.Column;
+
 public class Transaction {
     private Integer transactionId;
 
+    @Column(name = "txid")
     private String txid;
 
     private String txhash;

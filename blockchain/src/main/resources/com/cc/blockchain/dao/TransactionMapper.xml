@@ -19,11 +19,11 @@
     <result column="block_id" jdbcType="INTEGER" property="blockId" />
   </resultMap>
   <sql id="Base_Column_List">
-    transaction_id, txid, txhash, time, amount, fees, confirmations, status, sizeOnDisk, 
+    transaction_id, txid, txhash, time, amount, fees, confirmations, status, sizeOnDisk,
     weight, total_input, total_output, fee_per_byte, fee_per_weight_unit, block_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+    select
     <include refid="Base_Column_List" />
     from t_transaction
     where transaction_id = #{transactionId,jdbcType=INTEGER}
@@ -33,15 +33,15 @@
     where transaction_id = #{transactionId,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.cc.blockchain.po.Transaction" useGeneratedKeys="true" keyProperty="transactionId">
-    insert into transaction (txid, txhash,
+    insert into t_transaction (transaction_id, txid, txhash,
       time, amount, fees, confirmations,
       status, sizeOnDisk, weight,
       total_input, total_output, fee_per_byte,
       fee_per_weight_unit, block_id)
-    values (#{txid,jdbcType=CHAR}, #{txhash,jdbcType=CHAR},
-      #{time,jdbcType=BIGINT}, #{amount,jdbcType=DOUBLE}, #{fees,jdbcType=DOUBLE}, #{confirmations,jdbcType=INTEGER}, 
-      #{status,jdbcType=TINYINT}, #{sizeondisk,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER}, 
-      #{totalInput,jdbcType=DOUBLE}, #{totalOutput,jdbcType=DOUBLE}, #{feePerByte,jdbcType=DOUBLE}, 
+    values (#{transactionId,jdbcType=INTEGER}, #{txid,jdbcType=CHAR}, #{txhash,jdbcType=CHAR},
+      #{time,jdbcType=BIGINT}, #{amount,jdbcType=DOUBLE}, #{fees,jdbcType=DOUBLE}, #{confirmations,jdbcType=INTEGER},
+      #{status,jdbcType=TINYINT}, #{sizeondisk,jdbcType=INTEGER}, #{weight,jdbcType=INTEGER},
+      #{totalInput,jdbcType=DOUBLE}, #{totalOutput,jdbcType=DOUBLE}, #{feePerByte,jdbcType=DOUBLE},
       #{feePerWeightUnit,jdbcType=DOUBLE}, #{blockId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.cc.blockchain.po.Transaction">
