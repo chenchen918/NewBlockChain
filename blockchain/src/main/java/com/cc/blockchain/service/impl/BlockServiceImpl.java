@@ -4,10 +4,10 @@ import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.client.BitcoinRest;
 import com.cc.blockchain.dao.BlockMapper;
 import com.cc.blockchain.po.Block;
-import com.cc.blockchain.po.Transaction;
 import com.cc.blockchain.service.BlockService;
 
-import com.cc.blockchain.service.TransactionService;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +15,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BlockServiceImpl implements BlockService {
@@ -68,5 +69,13 @@ public class BlockServiceImpl implements BlockService {
             BlockHashs = syncBlock(BlockHashs);
         }
         logger.info("同 步 结 束 ");
+    }
+
+    @Override
+    public PageInfo<Block> getBlockPage(Integer pageNum) {
+        PageHelper.startPage(pageNum,5);
+        List<Block> listBlock=blockMapper.getBlockPage();
+        PageInfo<Block> blockPageInfo = new PageInfo<>(listBlock);
+        return blockPageInfo;
     }
 }

@@ -245,4 +245,17 @@
       </if>
     </where>
   </select>
+
+  <select id="getRecentblock" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_block
+    order by time desc limit 10
+  </select>
+
+  <select id="getBlockPage" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_block
+  </select>
 </mapper>

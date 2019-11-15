@@ -2,6 +2,8 @@ package com.cc.blockchain.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.dao.BlockMapper;
+import com.cc.blockchain.po.Block;
+import com.cc.blockchain.service.BlockService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Block")
@@ -18,10 +21,23 @@ public class BlockController {
     @Autowired
     private BlockMapper blockMapper;
 
-    @GetMapping("/getRecent")
-    public List<JSONObject> getRecent(){
-        List<JSONObject> recentList=blockMapper.getRecent();
-        return recentList;
+    @Autowired
+    private BlockService blockService;
+
+
+    @GetMapping("/getRecentblock")
+    public List<JSONObject> getRecentblock(){
+        List<Block> blocks=blockMapper.getRecentblock();
+        List<JSONObject> BlockJsons = blocks.stream().map(block -> {
+            JSONObject blockJson = new JSONObject();
+            blockJson.put("height", block.getHeight());
+            blockJson.put("blockhash", block.getBlockhash());
+            blockJson.put("miner", block.getMiner());
+            blockJson.put("time", block.getTime());
+            blockJson.put("size", block.getSizeondisk());
+            return blockJson;
+        }).collect(Collectors.toList());
+        return BlockJsons;
     }
 
     @GetMapping("/getWithPage")
@@ -40,6 +56,12 @@ public class BlockController {
 
     @GetMapping("/getInfoByHeight")
     public JSONObject getInfoByHeight(@RequestParam Integer height){
+
         return null;
+    }
+    @GetMapping("/getBlockPage")
+    public Object getBlockPage(@RequestParam(defaultValue = "1")Integer pageNum){
+        PageInfo<Block> listBlock=blockService.getBlockPage(pageNum);
+        return listBlock.getList();
     }
 }

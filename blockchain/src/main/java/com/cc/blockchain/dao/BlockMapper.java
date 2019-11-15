@@ -21,4 +21,8 @@ public interface BlockMapper {
     List<JSONObject> getRecent();
 
     JSONObject getInfoByHash(String blockhash);
+
+    List<Block> getRecentblock();
+
+    List<Block> getBlockPage();
 }
