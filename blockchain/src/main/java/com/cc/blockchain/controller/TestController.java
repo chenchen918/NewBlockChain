@@ -1,6 +1,7 @@
 package com.cc.blockchain.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.cc.blockchain.client.BitcoinJsonRpcImp;
 import com.cc.blockchain.client.BitcoinRest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,17 +17,21 @@ public class TestController {
     @Autowired
     private BitcoinRest bitcoinRest;
 
+    @Autowired
+    private BitcoinJsonRpcImp bitcoinJsonRpcImp;
+
     @GetMapping("/hei")
-    public String hei(){
-        JSONObject chainInfo = bitcoinRest.getChainInfo();
-        JSONObject blockhashByHeight = bitcoinRest.getBlockhashByHeight(10);
-        List<JSONObject> blockHeaders = bitcoinRest.getBlockHeaders(5, "0000000000000183691e29729ea6cec432fa9d3521507fd7c728a2893dcdb708");
-        JSONObject blockNoTxDetails = bitcoinRest.getBlockNoTxDetails("00000000001c31eefd455987ae4b805a961edbb2df195b57d0b1481c4c9d5f80");
-        JSONObject blockInfo = bitcoinRest.getBlockInfo("00000000001c31eefd455987ae4b805a961edbb2df195b57d0b1481c4c9d5f80");
-        JSONObject tx = bitcoinRest.getTransaction("e00fd08ec52cc53312a3d97ee91c0662d952c564534aceb84a8e038a73230019");
-        JSONObject mempoolInfo = bitcoinRest.getMempoolInfo();
-        JSONObject mempoolContents = bitcoinRest.getMempoolContents();
-        JSONObject utxo = bitcoinRest.getUTXO("e00fd08ec52cc53312a3d97ee91c0662d952c564534aceb84a8e038a73230019", 0);
+    public String hei() throws Throwable {
+//        JSONObject chainInfo = bitcoinRest.getChainInfo();
+//        JSONObject blockhashByHeight = bitcoinRest.getBlockhashByHeight(10);
+//        List<JSONObject> blockHeaders = bitcoinRest.getBlockHeaders(5, "0000000000000183691e29729ea6cec432fa9d3521507fd7c728a2893dcdb708");
+//        JSONObject blockNoTxDetails = bitcoinRest.getBlockNoTxDetails("00000000001c31eefd455987ae4b805a961edbb2df195b57d0b1481c4c9d5f80");
+//        JSONObject blockInfo = bitcoinRest.getBlockInfo("00000000001c31eefd455987ae4b805a961edbb2df195b57d0b1481c4c9d5f80");
+//        JSONObject tx = bitcoinRest.getTransaction("e00fd08ec52cc53312a3d97ee91c0662d952c564534aceb84a8e038a73230019");
+//        JSONObject mempoolInfo = bitcoinRest.getMempoolInfo();
+//        JSONObject mempoolContents = bitcoinRest.getMempoolContents();
+//        JSONObject utxo = bitcoinRest.getUTXO("e00fd08ec52cc53312a3d97ee91c0662d952c564534aceb84a8e038a73230019", 0);
+        JSONObject jsonObject = bitcoinJsonRpcImp.getRawTransaction("6cf6fc0fbf9af2280c48b56070c50d6300097c1469320120f14c4a9e2387b89a");
         return null;
     }
 }
