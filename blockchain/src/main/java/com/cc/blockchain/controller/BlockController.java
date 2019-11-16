@@ -75,7 +75,6 @@ public class BlockController {
     @GetMapping("/getBlockByHash")
     public JSONObject getBlockByHash(@RequestParam String blockhash){
         JSONObject BlockJson = new JSONObject();
-
         Block block=blockService.getBlockByhash(blockhash);
         BlockJson.put("blockhash",block.getBlockhash());
         BlockJson.put("height",block.getHeight());
@@ -117,5 +116,28 @@ public class BlockController {
         BlockJson.put("transactions",transactionJsons);
         return BlockJson;
 
+    }
+
+    @GetMapping("/getBlockByHeight")
+    public JSONObject getBlockByHeight(@RequestParam Integer height){
+        JSONObject BlockJson = new JSONObject();
+        Block block=blockService.getBlockByHeight(height);
+        BlockJson.put("blockhash",block.getBlockhash());
+        BlockJson.put("height",block.getHeight());
+        BlockJson.put("time",block.getTime());
+        BlockJson.put("miner",block.getMiner());
+        BlockJson.put("size",block.getSizeondisk());
+        BlockJson.put("confirmations",null);
+        BlockJson.put("txSize",block.getTxsize());
+        BlockJson.put("difficulty",block.getDifficulty());
+        BlockJson.put("merkleroot",block.getMerkleRoot());
+        BlockJson.put("bits",block.getBits());
+        BlockJson.put("version",block.getVersion());
+        BlockJson.put("weight",block.getWeight());
+        BlockJson.put("blockreward",block.getBlockReward());
+        BlockJson.put("feereward",block.getFeeReward());
+        BlockJson.put("transactionvolume",block.getTransactionVolume());
+        BlockJson.put("nonce",block.getNonce());
+        return BlockJson;
     }
 }

@@ -28,4 +28,6 @@ public interface BlockMapper {
     List<Block> getBlockPage();
 
     Block getBlockByhash(String blockhash);
+
+    Block getBlockByHeight(Integer height);
 }

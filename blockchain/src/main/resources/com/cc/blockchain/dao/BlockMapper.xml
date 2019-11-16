@@ -265,4 +265,11 @@
     from t_block
     where blockhash = #{blockhash}
   </select>
+
+  <select id="getBlockByHeight"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_block
+    where height = #{height}
+  </select>
 </mapper>

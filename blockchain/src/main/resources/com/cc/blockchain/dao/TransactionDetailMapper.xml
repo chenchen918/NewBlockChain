@@ -97,4 +97,11 @@
     from t_transaction_detail
     where transaction_id = #{transactionId}
   </select>
+
+  <select id="selectTransactionByTransactionId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_transaction_detail
+    where transaction_id = #{transactionId}
+  </select>
 </mapper>

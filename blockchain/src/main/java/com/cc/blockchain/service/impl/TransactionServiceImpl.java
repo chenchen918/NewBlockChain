@@ -3,10 +3,13 @@ package com.cc.blockchain.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.client.BitcoinRest;
+import com.cc.blockchain.constants.PageConfig;
 import com.cc.blockchain.dao.TransactionMapper;
 import com.cc.blockchain.po.Transaction;
 import com.cc.blockchain.service.TransactionDetailService;
 import com.cc.blockchain.service.TransactionService;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,6 +56,13 @@ public class TransactionServiceImpl implements TransactionService {
     @Override
     public List<Transaction> getBlockById(Integer blockId) {
         List<Transaction> transactions = transactionMapper.getBlockById(blockId);
+        return transactions;
+    }
+
+    @Override
+    public Page<Transaction> getPageBlockByBlockId(Integer blockId, Integer pageNum) {
+        PageHelper.startPage(pageNum, PageConfig.PAGE_SIZE);
+        Page<Transaction> transactions = transactionMapper.selectPageBlockByBlockId(blockId);
         return transactions;
     }
 }

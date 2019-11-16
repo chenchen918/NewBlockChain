@@ -85,4 +85,14 @@ public class BlockServiceImpl implements BlockService {
         return blockByhash;
     }
 
+
+    @Override
+    public Block getBlockByHeight(Integer height) {
+
+        Block blockByHeight = blockMapper.getBlockByHeight(height);
+        return blockByHeight;
+    }
+
+
+
 }

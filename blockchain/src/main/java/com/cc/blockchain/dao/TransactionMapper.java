@@ -1,6 +1,7 @@
 package com.cc.blockchain.dao;
 
 import com.cc.blockchain.po.Transaction;
+import com.github.pagehelper.Page;
 
 import java.util.List;
 
@@ -18,4 +19,6 @@ public interface TransactionMapper {
     int updateByPrimaryKey(Transaction record);
 
     List<Transaction> getBlockById(Integer blockId);
+
+    Page<Transaction> selectPageBlockByBlockId(Integer blockId);
 }

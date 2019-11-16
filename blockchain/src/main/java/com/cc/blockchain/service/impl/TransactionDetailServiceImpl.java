@@ -77,6 +77,12 @@ public class TransactionDetailServiceImpl implements TransactionDetailService {
         return transactionDetails;
     }
 
+    @Override
+    public List<TransactionDetail> getTransactionByTransactionId(Integer transactionId) {
+        List<TransactionDetail> transactionDetails = transactionDetailMapper.selectTransactionByTransactionId(transactionId);
+        return transactionDetails;
+    }
+
     public List<TransactionDetail> getByTransactionId(Integer transactionId) {
         List<TransactionDetail> transactionDetails = transactionDetailMapper.selectTransactionById(transactionId);
         return transactionDetails;

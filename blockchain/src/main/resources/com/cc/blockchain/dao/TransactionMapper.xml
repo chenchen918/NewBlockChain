@@ -223,6 +223,11 @@
   </select>
 
 
-
+<select id="selectPageBlockByBlockId" resultMap="BaseResultMap">
+  select
+  <include refid="Base_Column_List" />
+  from t_transaction
+  where block_id = #{blockId}
+</select>
 
 </mapper>
