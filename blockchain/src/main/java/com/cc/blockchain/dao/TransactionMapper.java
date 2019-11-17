@@ -21,4 +21,6 @@ public interface TransactionMapper {
     List<Transaction> getBlockById(Integer blockId);
 
     Page<Transaction> selectPageBlockByBlockId(Integer blockId);
+
+    Transaction selectTransactionByTxid(String txid);
 }

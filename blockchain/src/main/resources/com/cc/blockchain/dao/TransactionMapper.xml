@@ -230,4 +230,10 @@
   where block_id = #{blockId}
 </select>
 
+  <select id="selectTransactionByTxid" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_transaction
+    where txid = #{txid}
+  </select>
 </mapper>

@@ -11,4 +11,6 @@ public interface TransactionService {
     List<Transaction> getBlockById(Integer blockId);
 
     Page<Transaction> getPageBlockByBlockId(Integer blockId, Integer pageNum);
+
+    Transaction getTransactionByTxid(String txid);
 }
