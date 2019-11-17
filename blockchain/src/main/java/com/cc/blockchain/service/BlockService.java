@@ -12,4 +12,6 @@ public interface BlockService {
     void syncBlocks(String fromBlockhash);
 
     PageInfo<Block> getBlockPage(Integer pageNum);
+
+    Block getBlockByhash(String blockhash);
 }

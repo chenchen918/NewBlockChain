@@ -1,7 +1,7 @@
 package com.cc.blockchain.dao;
 
 import com.cc.blockchain.po.TransactionDetail;
-import feign.Param;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 

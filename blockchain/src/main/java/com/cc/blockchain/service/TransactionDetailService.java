@@ -10,6 +10,6 @@ public interface TransactionDetailService {
 
     void syncTxDetailVin(JSONObject vin, Integer transactionId);
 
-    List<TransactionDetail> getByTransactionId(Integer transactionId);
 
+    List<TransactionDetail> getTransactionById(Integer transactionId);
 }

@@ -3,14 +3,15 @@ package com.cc.blockchain.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.dao.BlockMapper;
 import com.cc.blockchain.po.Block;
+import com.cc.blockchain.po.Transaction;
+import com.cc.blockchain.po.TransactionDetail;
 import com.cc.blockchain.service.BlockService;
+import com.cc.blockchain.service.TransactionDetailService;
+import com.cc.blockchain.service.TransactionService;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -23,6 +24,12 @@ public class BlockController {
 
     @Autowired
     private BlockService blockService;
+
+    @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
+    private TransactionDetailService transactionDetailService;
 
 
     @GetMapping("/getRecentblock")
@@ -60,8 +67,55 @@ public class BlockController {
         return null;
     }
     @GetMapping("/getBlockPage")
-    public Object getBlockPage(@RequestParam(defaultValue = "1")Integer pageNum){
+    public  PageInfo<Block> getBlockPage(@RequestParam(defaultValue = "1")Integer pageNum){
         PageInfo<Block> listBlock=blockService.getBlockPage(pageNum);
-        return listBlock.getList();
+        return listBlock;
+    }
+
+    @GetMapping("/getBlockByHash")
+    public JSONObject getBlockByHash(@RequestParam String blockhash){
+        JSONObject BlockJson = new JSONObject();
+
+        Block block=blockService.getBlockByhash(blockhash);
+        BlockJson.put("blockhash",block.getBlockhash());
+        BlockJson.put("height",block.getHeight());
+        BlockJson.put("time",block.getTime());
+        BlockJson.put("miner",block.getMiner());
+        BlockJson.put("size",block.getSizeondisk());
+        BlockJson.put("confirmations",null);
+        BlockJson.put("txSize",block.getTxsize());
+        BlockJson.put("difficulty",block.getDifficulty());
+        BlockJson.put("merkleroot",block.getMerkleRoot());
+        BlockJson.put("bits",block.getBits());
+        BlockJson.put("version",block.getVersion());
+        BlockJson.put("weight",block.getWeight());
+        BlockJson.put("blockreward",block.getBlockReward());
+        BlockJson.put("feereward",block.getFeeReward());
+        BlockJson.put("transactionvolume",block.getTransactionVolume());
+        BlockJson.put("nonce",block.getNonce());
+
+        List<Transaction> transactions = transactionService.getBlockById(block.getBlockId());
+        List<JSONObject> transactionJsons = transactions.stream().map(transaction -> {
+            JSONObject transactionJson = new JSONObject();
+            transactionJson.put("txid", transaction.getTxid());
+            transactionJson.put("txhash", transaction.getTxhash());
+            transactionJson.put("time", transaction.getTime());
+            transactionJson.put("fees", transaction.getFees());
+            transactionJson.put("totalOutput", transaction.getTotalOutput());
+
+            List<TransactionDetail> Details = transactionDetailService.getTransactionById(transaction.getTransactionId());
+            List<JSONObject> DetailJsons = Details.stream().map(Detail -> {
+                JSONObject DetailJson = new JSONObject();
+                DetailJson.put("address", Detail.getAddress());
+                DetailJson.put("type", Detail.getType());
+                DetailJson.put("amount", Math.abs(Detail.getAmount()));
+                return DetailJson;
+            }).collect(Collectors.toList());
+            transactionJson.put("transactions", DetailJsons);
+            return transactionJson;
+        }).collect(Collectors.toList());
+        BlockJson.put("transactions",transactionJsons);
+        return BlockJson;
+
     }
 }

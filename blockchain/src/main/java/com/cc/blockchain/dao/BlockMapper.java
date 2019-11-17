@@ -2,6 +2,7 @@ package com.cc.blockchain.dao;
 
 import com.alibaba.fastjson.JSONObject;
 import com.cc.blockchain.po.Block;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -25,4 +26,6 @@ public interface BlockMapper {
     List<Block> getRecentblock();
 
     List<Block> getBlockPage();
+
+    Block getBlockByhash(String blockhash);
 }

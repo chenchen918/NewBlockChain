@@ -2,6 +2,8 @@ package com.cc.blockchain.dao;
 
 import com.cc.blockchain.po.Transaction;
 
+import java.util.List;
+
 public interface TransactionMapper {
     int deleteByPrimaryKey(Integer transactionId);
 
@@ -14,4 +16,6 @@ public interface TransactionMapper {
     int updateByPrimaryKeySelective(Transaction record);
 
     int updateByPrimaryKey(Transaction record);
+
+    List<Transaction> getBlockById(Integer blockId);
 }

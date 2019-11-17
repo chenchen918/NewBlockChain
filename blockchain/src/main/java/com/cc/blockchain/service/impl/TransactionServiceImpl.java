@@ -49,4 +49,10 @@ public class TransactionServiceImpl implements TransactionService {
 
 
     }
+
+    @Override
+    public List<Transaction> getBlockById(Integer blockId) {
+        List<Transaction> transactions = transactionMapper.getBlockById(blockId);
+        return transactions;
+    }
 }

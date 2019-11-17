@@ -78,4 +78,11 @@ public class BlockServiceImpl implements BlockService {
         PageInfo<Block> blockPageInfo = new PageInfo<>(listBlock);
         return blockPageInfo;
     }
+
+    @Override
+    public Block getBlockByhash(String blockhash) {
+        Block blockByhash = blockMapper.getBlockByhash(blockhash);
+        return blockByhash;
+    }
+
 }

@@ -189,6 +189,13 @@
     </set>
     where transaction_id = #{transactionId,jdbcType=INTEGER}
   </update>
+
+  <select id="getBlockById" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_transaction
+    where block_id = #{blockId}
+  </select>
   <update id="updateByPrimaryKey" parameterType="com.cc.blockchain.po.Transaction">
     update t_transaction
     set txid = #{txid,jdbcType=CHAR},
@@ -207,4 +214,15 @@
       block_id = #{blockId,jdbcType=INTEGER}
     where transaction_id = #{transactionId,jdbcType=INTEGER}
   </update>
+
+  <select id="selectByBlockId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_transaction
+    where block_id = #{blockId}
+  </select>
+
+
+
+
 </mapper>

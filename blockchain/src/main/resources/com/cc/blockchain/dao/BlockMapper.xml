@@ -258,4 +258,11 @@
     <include refid="Base_Column_List" />
     from t_block
   </select>
+
+  <select id="getBlockByhash"  resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from t_block
+    where blockhash = #{blockhash}
+  </select>
 </mapper>
