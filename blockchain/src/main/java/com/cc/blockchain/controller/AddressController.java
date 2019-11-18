@@ -18,8 +18,19 @@ public class AddressController {
     @GetMapping("/getInfoByAddress")
     public JSONObject getInfoByAddress(@RequestParam String address){
         Integer  TransactionAmount  = transactionDetailService.getAmountByAddress(address);
+        Double gain = transactionDetailService.getGainByAddres(address);
+        Double payment = transactionDetailService.getPaymentByAddress(address);
+        Double balance = gain + payment;
 
-        return null;
+
+        JSONObject addressJson = new JSONObject();
+        addressJson.put("address", address);
+        addressJson.put("txSize", TransactionAmount);
+        addressJson.put("gain", gain);
+        addressJson.put("payment", Math.abs(payment));
+        addressJson.put("balance", balance);
+
+        return addressJson;
     }
 
 }

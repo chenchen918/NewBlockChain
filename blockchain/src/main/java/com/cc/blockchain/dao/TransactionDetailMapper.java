@@ -23,4 +23,8 @@ public interface TransactionDetailMapper {
     List<TransactionDetail> selectTransactionByTransactionId(Integer transactionId);
 
     Integer selectAmountByAddress(String address);
+
+    Double selectGainByAddres(String address);
+
+    Double selectPaymentByAddress(String address);
 }

@@ -111,4 +111,18 @@
     from t_transaction_detail
     where address = #{address}
   </select>
+
+  <select id="selectGainByAddres" resultType="java.lang.Double">
+    select
+    sum(amount)
+    from t_transaction_detail
+    where address = #{address} and `type` = 1
+  </select>
+
+  <select id="selectPaymentByAddress" resultType="java.lang.Double">
+    select
+    sum(amount)
+    from t_transaction_detail
+    where address = #{address} and `type` = 0
+  </select>
 </mapper>

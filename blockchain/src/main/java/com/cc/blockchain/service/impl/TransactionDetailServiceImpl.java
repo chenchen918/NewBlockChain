@@ -89,6 +89,18 @@ public class TransactionDetailServiceImpl implements TransactionDetailService {
         return Amount;
     }
 
+    @Override
+    public Double getGainByAddres(String address) {
+        Double Gain = transactionDetailMapper.selectGainByAddres(address);
+        return Gain;
+    }
+
+    @Override
+    public Double getPaymentByAddress(String address) {
+        Double Payment = transactionDetailMapper.selectPaymentByAddress(address);
+        return Payment;
+    }
+
     public List<TransactionDetail> getByTransactionId(Integer transactionId) {
         List<TransactionDetail> transactionDetails = transactionDetailMapper.selectTransactionById(transactionId);
         return transactionDetails;

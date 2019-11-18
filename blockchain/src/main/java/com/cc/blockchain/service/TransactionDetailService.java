@@ -16,4 +16,8 @@ public interface TransactionDetailService {
     List<TransactionDetail> getTransactionByTransactionId(Integer transactionId);
 
     Integer getAmountByAddress(String address);
+
+    Double getGainByAddres(String address);
+
+    Double getPaymentByAddress(String address);
 }
