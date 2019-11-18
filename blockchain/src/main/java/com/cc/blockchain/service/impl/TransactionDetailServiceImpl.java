@@ -83,6 +83,12 @@ public class TransactionDetailServiceImpl implements TransactionDetailService {
         return transactionDetails;
     }
 
+    @Override
+    public Integer getAmountByAddress(String address) {
+        Integer Amount = transactionDetailMapper.selectAmountByAddress(address);
+        return Amount;
+    }
+
     public List<TransactionDetail> getByTransactionId(Integer transactionId) {
         List<TransactionDetail> transactionDetails = transactionDetailMapper.selectTransactionById(transactionId);
         return transactionDetails;

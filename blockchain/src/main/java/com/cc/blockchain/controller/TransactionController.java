@@ -102,5 +102,56 @@ public class TransactionController {
         return TransactionJson;
     }
 
+    @GetMapping("/getBlockByBlockHashPage")
+    public PageDTO<JSONObject> getByBlockhashWithPage(@RequestParam String blockhash,
+                                                      @RequestParam(defaultValue = "1") Integer pageNum){
+        Block block = blockService.getBlockByhash(blockhash);
+        Integer blockId = block.getBlockId();
+        Page<Transaction> TransactionPage = transactionService.getPageBlockByBlockId(blockId, pageNum);
+        PageDTO<JSONObject> pageDTO = getPageDTOByTransactionPage(TransactionPage);
+        return pageDTO;
+
+    }
+
+    @GetMapping("/getBlockByAddressPage")
+    public PageDTO<JSONObject> getByAddressWithPage(@RequestParam String address,
+                                                    @RequestParam(defaultValue = "1") Integer pageNum){
+        Page<Transaction> TransactionPage = transactionService.getTransactionByAddressPage(address, pageNum);
+        PageDTO<JSONObject> pageDTO = getPageDTOByTransactionPage(TransactionPage);
+        return pageDTO;
+    }
+
+    private PageDTO<JSONObject> getPageDTOByTransactionPage(Page<Transaction> TransactionPage){
+        List<JSONObject> TransactionJsons = TransactionPage.stream().map(transaction -> {
+            JSONObject TransactionJson = new JSONObject();
+            TransactionJson.put("txid", transaction.getTxid());
+            TransactionJson.put("txhash", transaction.getTxhash());
+            TransactionJson.put("fees", transaction.getFees());
+
+            TransactionJson.put("time", transaction.getTime());
+            TransactionJson.put("totalOutput", transaction.getTotalOutput());
+
+            List<TransactionDetail> TransactionDetails = transactionDetailService.getTransactionById(transaction.getTransactionId());
+            List<JSONObject> TransactionDetailJsons = TransactionDetails.stream().map(transactionDetail -> {
+                JSONObject TransactionDetailJson = new JSONObject();
+                TransactionDetailJson.put("address", transactionDetail.getAddress());
+                TransactionDetailJson.put("type", transactionDetail.getType());
+                TransactionDetailJson.put("amount", Math.abs(transactionDetail.getAmount()));
+                return TransactionDetailJson;
+            }).collect(Collectors.toList());
+            TransactionJson.put("TransactionDetailJsons", TransactionDetailJsons);
+            return TransactionJson;
+        }).collect(Collectors.toList());
+
+
+        PageDTO<JSONObject> pageDTO = new PageDTO<>();
+        pageDTO.setTotal(TransactionPage.getTotal());
+        pageDTO.setPageSize(PageConfig.PAGE_SIZE);
+        pageDTO.setCurrentPage(TransactionPage.getPageNum());
+        pageDTO.setList(TransactionJsons);
+
+        return pageDTO;
+    }
+
 
 }

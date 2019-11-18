@@ -104,4 +104,11 @@
     from t_transaction_detail
     where transaction_id = #{transactionId}
   </select>
+
+  <select id="selectAmountByAddress" resultType="java.lang.Integer">
+      select
+    count(tx_detail_id)
+    from t_transaction_detail
+    where address = #{address}
+  </select>
 </mapper>

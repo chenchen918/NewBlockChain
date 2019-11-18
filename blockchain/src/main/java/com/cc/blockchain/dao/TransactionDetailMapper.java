@@ -21,4 +21,6 @@ public interface TransactionDetailMapper {
     List<TransactionDetail> selectTransactionById(@Param("transactionId") Integer transactionId);
 
     List<TransactionDetail> selectTransactionByTransactionId(Integer transactionId);
+
+    Integer selectAmountByAddress(String address);
 }

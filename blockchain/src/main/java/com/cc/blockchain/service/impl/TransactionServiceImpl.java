@@ -71,4 +71,11 @@ public class TransactionServiceImpl implements TransactionService {
         Transaction transaction= transactionMapper.selectTransactionByTxid(txid);
         return transaction;
     }
+
+    @Override
+    public Page<Transaction> getTransactionByAddressPage(String address, Integer pageNum) {
+        PageHelper.startPage(pageNum, PageConfig.PAGE_SIZE);
+        Page<Transaction> transactions = transactionMapper.selectTransactionByAddress(address);
+        return transactions;
+    }
 }
