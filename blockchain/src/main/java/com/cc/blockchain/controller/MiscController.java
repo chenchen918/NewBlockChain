@@ -11,6 +11,7 @@ public class MiscController {
 
     @GetMapping("/search")
     public String search(@RequestParam String keyword){
+
         return null;
     }
 }

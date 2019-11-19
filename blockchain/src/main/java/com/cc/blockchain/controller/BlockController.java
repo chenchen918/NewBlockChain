@@ -18,6 +18,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/Block")
+@CrossOrigin
 public class BlockController {
     @Autowired
     private BlockMapper blockMapper;
