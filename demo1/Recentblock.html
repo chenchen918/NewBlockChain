@@ -12,9 +12,15 @@
 <body>
     <div id="app">
         <el-table :data="ListRecentBlock" stripe style="width: 100%">
-            <el-table-column prop="height" label="Height" width="180">
+            <el-table-column label="Height" width="180">
+                <template slot-scope="scope">
+                            <a href="">{{scope.row.height}}</a>
+                     </template>
             </el-table-column>
             <el-table-column prop="blockhash" label="Hash" width="180">
+                <template slot-scope="scope">
+                            <a :href="'http://localhost:5000/BlockByHash?blockhash='+scope.row.blockhash">{{scope.row.blockhash}}</a>
+                     </template>
             </el-table-column>
             <el-table-column prop="time" label="Time" width="180">
             </el-table-column>
@@ -32,5 +38,19 @@
     <script src="viewmodels/Recentblock.js"></script>
 
 </body>
+<style type="text/css">
+    a:link,
+    a:visited {
+        text-decoration: none;
+        /*超链接无下划线*/
+    }
+    
+    a:hover {
+        text-decoration: underline;
+        /*鼠标放上去有下划线*/
+    }
+</style>
+
+<a href="#">超链接</a>
 
 </html>

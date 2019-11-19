@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+<body>
+    <div id="app" style="text-align:center">
+        <h2>块详情</h2>
+        <el-form ref="form" :model="BlockHash" label-width="80px">
+            <el-form-item label="Hash：">
+                {{BlockHash.blockhash}}
+            </el-form-item>
+            <el-form-item label="NumberOfTransactions:">
+                {{BlockHash.txSize}}
+            </el-form-item>
+            <el-form-item label="Height:">
+                {{BlockHash.height}}
+            </el-form-item>
+            <el-form-item label="Timestamp：">
+                {{BlockHash.time}}
+            </el-form-item>
+            <el-form-item label="Difficulty：">
+                {{BlockHash.difficulty}}
+            </el-form-item>
+            <el-form-item label="TxSize：">
+                {{BlockHash.txSize}}
+            </el-form-item>
+            <el-form-item label="Nonce:">
+                {{BlockHash.nonce}}
+            </el-form-item>
+            <el-form-item label="Size:">
+                {{BlockHash.size}}
+            </el-form-item>
+            <el-form-item label="Version:">
+                {{BlockHash.version}}
+            </el-form-item>
+            <el-form-item label="Weight:">
+                {{BlockHash.weight}}
+            </el-form-item>
+        </el-form>
+        <h2>交易详情</h2>
+
+
+
+
+    </div>
+
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="viewmodels/BlockByHash.js"></script>
+
+</body>
+
+</html>
