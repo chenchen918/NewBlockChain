@@ -78,4 +78,10 @@ public class TransactionServiceImpl implements TransactionService {
         Page<Transaction> transactions = transactionMapper.selectTransactionByAddress(address);
         return transactions;
     }
+
+    @Override
+    public List<Transaction> getTransactionList() {
+
+        return transactionMapper.selectTransactionList();
+    }
 }

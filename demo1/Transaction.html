@@ -11,7 +11,6 @@
 
 <body>
     <div id="app">
-
         <el-container>
             <el-header>Header</el-header>
             <el-container>
@@ -39,20 +38,15 @@
                 </el-aside>
                 <el-container>
                     <el-main>
-                        <el-table :data="ListRecentBlock" stripe style="width: 100%">
-                            <el-table-column label="Height" width="180">
-                                <template slot-scope="scope">
-                                                                    <a href="">{{scope.row.height}}</a>
-                                                             </template>
+                        <el-table :data="Transactions" stripe style="width: 100%">
+                            <el-table-column prop="txid" label="TxId" width="180">
+
                             </el-table-column>
-                            <el-table-column prop="blockhash" label="Hash" width="180">
-                                <template slot-scope="scope">
-                                                                    <a :href="'http://localhost:5000/BlockByHash?blockhash='+scope.row.blockhash">{{scope.row.blockhash}}</a>
-                                                             </template>
+                            <el-table-column prop="txhash" label="TxHash" width="180">
+                            </el-table-column>
+                            <el-table-column prop="status" label="Status" width="180">
                             </el-table-column>
                             <el-table-column prop="time" label="Time" width="180">
-                            </el-table-column>
-                            <el-table-column prop="miner" label="Miner" width="180">
                             </el-table-column>
                             <el-table-column prop="size" label="Size" width="180">
                             </el-table-column>
@@ -64,29 +58,14 @@
         </el-container>
 
 
-
     </div>
 
     <script src="assets/js/axios.min.js"></script>
     <script src="assets/js/common.js"></script>
     <script src="assets/js/vue.js"></script>
     <script src="assets/js/elementui.js"></script>
-    <script src="viewmodels/Recentblock.js"></script>
+    <script src="viewmodels/Transaction.js"></script>
 
 </body>
-<style type="text/css">
-    a:link,
-    a:visited {
-        text-decoration: none;
-        /*超链接无下划线*/
-    }
-    
-    a:hover {
-        text-decoration: underline;
-        /*鼠标放上去有下划线*/
-    }
-</style>
-
-<a href="#">超链接</a>
 
 </html>

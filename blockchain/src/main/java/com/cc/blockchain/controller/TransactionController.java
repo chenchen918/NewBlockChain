@@ -11,16 +11,14 @@ import com.cc.blockchain.service.TransactionDetailService;
 import com.cc.blockchain.service.TransactionService;
 import com.github.pagehelper.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/transaction")
+@CrossOrigin
 public class TransactionController {
     @Autowired
     private BlockService blockService;
@@ -31,10 +29,22 @@ public class TransactionController {
     @Autowired
     private TransactionDetailService transactionDetailService;
 
-    @GetMapping("/getRecentUnconfirmed")
-    public List<JSONObject> getRecentUnconfirmed(@RequestParam(required = false, defaultValue = "20") Integer size){
-        return null;
+    @GetMapping("/getTransaction")
+    public List<JSONObject> getTransaction(){
+        List<Transaction>TransactionList=transactionService.getTransactionList();
+        List<JSONObject> TransactionJsons = TransactionList.stream().map(transaction -> {
+            JSONObject TransactionJson = new JSONObject();
+            TransactionJson.put("txid", transaction.getTxid());
+            TransactionJson.put("txhash", transaction.getTxhash());
+            TransactionJson.put("status", transaction.getStatus());
+            TransactionJson.put("time", transaction.getTime());
+            TransactionJson.put("size", transaction.getSizeondisk());
+            return TransactionJson;
+        }).collect(Collectors.toList());
+        return TransactionJsons;
     }
+
+
 
     @GetMapping("/getByTxhash")
     public JSONObject getByTxhash(@RequestParam String txhash){
@@ -132,7 +142,7 @@ public class TransactionController {
             TransactionJson.put("totalOutput", transaction.getTotalOutput());
 
             List<TransactionDetail> TransactionDetails = transactionDetailService.getTransactionById(transaction.getTransactionId());
-            List<JSONObject> TransactionDetailJsons = TransactionDetails.stream().map(transactionDetail -> {
+                List<JSONObject> TransactionDetailJsons = TransactionDetails.stream().map(transactionDetail -> {
                 JSONObject TransactionDetailJson = new JSONObject();
                 TransactionDetailJson.put("address", transactionDetail.getAddress());
                 TransactionDetailJson.put("type", transactionDetail.getType());
