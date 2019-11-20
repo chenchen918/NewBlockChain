@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+
+<body>
+    <div id="app" style="text-align:center">
+        <h2>块详情</h2>
+        <el-form ref="form" :model="ListByheight" label-width="80px">
+            <el-form-item label="Hash：">
+                {{ListByheight.blockhash}}
+            </el-form-item>
+            <el-form-item label="NumberOfTransactions:">
+                {{ListByheight.txSize}}
+            </el-form-item>
+            <el-form-item label="Height:">
+                {{ListByheight.height}}
+            </el-form-item>
+            <el-form-item label="Timestamp：">
+                {{ListByheight.time}}
+            </el-form-item>
+            <el-form-item label="Difficulty：">
+                {{ListByheight.difficulty}}
+            </el-form-item>
+            <el-form-item label="TxSize：">
+                {{ListByheight.txSize}}
+            </el-form-item>
+            <el-form-item label="Nonce:">
+                {{ListByheight.nonce}}
+            </el-form-item>
+            <el-form-item label="Size:">
+                {{ListByheight.size}}
+            </el-form-item>
+            <el-form-item label="Version:">
+                {{ListByheight.version}}
+            </el-form-item>
+            <el-form-item label="Weight:">
+                {{ListByheight.weight}}
+            </el-form-item>
+        </el-form>
+        <h2>交易详情</h2>
+        <el-pagination background layout="prev, pager, next" :total="total" :page-size="pageSize" @current-change="currentChange"></el-pagination>
+
+        <el-card class="box-card">
+            <div v-for="(o,index) in listTransaction" :key="index" class="text item" style="text-align:left">
+                <hr>{{'日期 ' + o.time }} <br><br>{{'地址 ' + o.txhash }} <br><br>{{'交易ID ' + o.txid }}<br><br>
+
+
+
+            </div>
+        </el-card>
+
+
+
+
+
+
+
+    </div>
+
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="viewmodels/BlockByHeight.js"></script>
+
+</body>
+
+</html>
