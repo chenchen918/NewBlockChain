@@ -74,7 +74,7 @@ public class TransactionServiceImpl implements TransactionService {
 
     @Override
     public Page<Transaction> getTransactionByAddressPage(String address, Integer pageNum) {
-        PageHelper.startPage(pageNum, PageConfig.PAGE_SIZE);
+        PageHelper.startPage(pageNum, 5);
         Page<Transaction> transactions = transactionMapper.selectTransactionByAddress(address);
         return transactions;
     }

@@ -5,6 +5,9 @@ var app = new Vue({
 
     },
     methods: {
+        ToBlock() {
+            window.location.href = "http:/Recentblock"
+        },
         getTransaction() {
             axios.get("/transaction/getTransaction")
                 .then(res => {

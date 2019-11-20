@@ -3,7 +3,8 @@ var app = new Vue({
     data: {
 
         BlockHash: {},
-        Transactions: {}
+        Transactions: [],
+        Transactionss: [],
 
 
     },
@@ -13,7 +14,9 @@ var app = new Vue({
                 .then(res => {
                     console.log(res)
                     this.BlockHash = res.data;
-                    this.Transactions = res.data.Transactions;
+                    this.Transactions = res.data.transactions;
+                    this.Transactionss = res.data.transactions.transactions;
+                    console.log(res.data.transactions.transactions)
                 })
                 .catch(err => {
                     console.error(err);

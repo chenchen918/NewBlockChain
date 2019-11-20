@@ -40,9 +40,9 @@
                 <el-container>
                     <el-main>
                         <el-table :data="ListRecentBlock" stripe style="width: 100%">
-                            <el-table-column label="Height" width="180">
+                            <el-table-column prop="height" label="Height" width="180">
                                 <template slot-scope="scope">
-                                                                    <a href="">{{scope.row.height}}</a>
+                                                                    <a :href="'http://localhost:5000/BlockByHeight?height='+scope.row.height">{{scope.row.height}}</a>
                                                              </template>
                             </el-table-column>
                             <el-table-column prop="blockhash" label="Hash" width="180">
