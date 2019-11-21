@@ -18,8 +18,8 @@
                     <h3>Block Explorer</h3>
                     <el-menu default-active="2" class="el-menu-vertical-demo">
 
-                        <el-menu-item index="2">
-                            <span slot="title" @click="ToBlock()">块</span>
+                        <el-menu-item index="2" @click="ToBlock()">
+                            <span slot="title">块</span>
                         </el-menu-item>
                         <el-menu-item index="2">
                             <span slot="title">交易</span>
@@ -40,13 +40,18 @@
                     <el-main>
                         <el-table :data="Transactions" stripe style="width: 100%">
                             <el-table-column prop="txid" label="TxId" width="180">
-
+                                <template slot-scope="scope">
+                                    <a href="">{{scope.row.txid}}</a>
+                             </template>
                             </el-table-column>
                             <el-table-column prop="txhash" label="TxHash" width="180">
                             </el-table-column>
                             <el-table-column prop="status" label="Status" width="180">
                             </el-table-column>
                             <el-table-column prop="time" label="Time" width="180">
+                                <template slot-scope="scope">
+                                            <a href="">{{timestampToTime(scope.row.time)}}</a>
+                                     </template>
                             </el-table-column>
                             <el-table-column prop="size" label="Size" width="180">
                             </el-table-column>
@@ -67,5 +72,17 @@
     <script src="viewmodels/Transaction.js"></script>
 
 </body>
+<style type="text/css">
+    a:link,
+    a:visited {
+        text-decoration: none;
+        /*超链接无下划线*/
+    }
+    
+    a:hover {
+        text-decoration: underline;
+        /*鼠标放上去有下划线*/
+    }
+</style>
 
 </html>

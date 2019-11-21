@@ -23,7 +23,7 @@
                 {{BlockHash.height}}
             </el-form-item>
             <el-form-item label="Timestamp：">
-                {{BlockHash.time}}
+                {{timestampToTime(BlockHash.time)}}
             </el-form-item>
             <el-form-item label="Difficulty：">
                 {{BlockHash.difficulty}}
@@ -48,7 +48,8 @@
 
         <el-card class="box-card">
             <div v-for="(o,index) in Transactions" :key="index" class="text item" style="text-align:left">
-                {{'日期 ' + o.time }} <br><br>{{'地址 ' + o.txhash }} <br><br>{{'交易ID ' + o.txid }}<br><br>
+
+                {{'日期 ' + timestampToTime(o.time) }} <br><br>{{'地址 ' + o.txhash }} <br><br>{{'交易ID ' + o.txid }}<br><br>
 
             </div>
         </el-card>

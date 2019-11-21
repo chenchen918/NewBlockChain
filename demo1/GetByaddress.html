@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="assets/css/elementui.css">
+    <title>Demo</title>
+</head>
+
+<body>
+    <div id="app" style="text-align:center">
+        <h2>地址详情</h2>
+        <el-form ref="form" :model="Byaddress" label-width="80px">
+            <el-form-item label="Address：">
+                {{Byaddress.address}}
+            </el-form-item>
+            <el-form-item label="Balance：">
+                {{Byaddress.balance}}
+            </el-form-item>
+            <el-form-item label="Gain：">
+                {{Byaddress.gain}}
+            </el-form-item>
+            <el-form-item label="Payment：">
+                {{Byaddress.payment}}
+            </el-form-item>
+            <el-form-item label="TxSize：">
+                {{Byaddress.txSize}}
+            </el-form-item>
+
+        </el-form>
+    </div>
+
+    <script src="assets/js/axios.min.js"></script>
+    <script src="assets/js/common.js"></script>
+    <script src="assets/js/vue.js"></script>
+    <script src="assets/js/elementui.js"></script>
+    <script src="viewmodels/GetByaddress.js"></script>
+
+</body>
+
+</html>

@@ -63,7 +63,11 @@ public class BitcoinScheduler {
 
             return tJson;
         }).collect(Collectors.toList());
-        List<JSONObject> sortedDeltaTxesJsons = deltaTxesJsons.stream().sorted(Comparator.comparingLong(t -> t.getLong("time"))).collect(Collectors.toList());
+
+        List<JSONObject> sortedDeltaTxesJsons = deltaTxesJsons.stream().sorted((t1, t2) -> {
+            return (int)(t2.getLong("time") - t1.getLong("time"));
+        }).collect(Collectors.toList());
+
         simpMessagingTemplate.convertAndSend("/bitcoin/deltaTx", sortedDeltaTxesJsons);
 
         deltaTransactions = new LinkedList<>();
