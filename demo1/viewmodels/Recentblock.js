@@ -3,6 +3,7 @@ var app = new Vue({
     data: {
         ListRecentBlock: [],
         type: [{ id: 1, name: "块" }, { id: 2, name: "交易" }],
+        blockhash: ""
 
     },
     methods: {

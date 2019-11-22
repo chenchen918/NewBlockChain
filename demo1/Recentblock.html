@@ -13,7 +13,10 @@
     <div id="app">
 
         <el-container>
-            <el-header>Header</el-header>
+            <el-header style="text-align:center">
+                <el-input v-model="blockhash" placeholder="请输入内容" style="width: 400px;"></el-input>
+                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+            </el-header>
             <el-container>
                 <el-aside width="200px">
                     <h3>Block Explorer</h3>
@@ -66,7 +69,6 @@
 
 
     </div>
-
     <script src="assets/js/axios.min.js"></script>
     <script src="assets/js/common.js"></script>
     <script src="assets/js/vue.js"></script>
