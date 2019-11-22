@@ -14,8 +14,8 @@
 
         <el-container>
             <el-header style="text-align:center">
-                <el-input v-model="blockhash" placeholder="请输入内容" style="width: 400px;"></el-input>
-                <el-button type="primary" icon="el-icon-search">搜索</el-button>
+                <el-input v-model="keyword" placeholder="请输入内容" style="width: 400px;"></el-input>
+                <el-button type="primary" icon="el-icon-search" @click="handleSearchClick">搜索</el-button>
             </el-header>
             <el-container>
                 <el-aside width="200px">
